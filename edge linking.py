@@ -1,37 +1,43 @@
 # In[ ]:## Read image and convert it to grayscale image
 ## Developed by : 
 ## Reg no : 
-import cv2
 import numpy as np
+import cv2
 import matplotlib.pyplot as plt
-image1=cv2.imread('.jpg',0)
-img= cv2.GaussianBlur()
-plt.imshow(img)
-
-## Find the edges in the image using canny detector and display
-## Developed by :
-## Reg no : 
-edges1 = cv2.Canny(img,)
-plt.imshow(edges1,cmap = 'gray')
-plt.title('Edge Image'), plt.xticks()
+#READ THE GRAY IMAGE USING IMREAD 
+#READ THE COLOR IMAGE USING IMREAD
+#CONVERT THE COLOR FROM BGR TO RGB
+#CONVERT THE COLOR FROM GRAY TO RGB
+gray = cv2.GaussianBlur(gray,(3,3),0)
+plt.figure(figsize=(13,13))
+plt.subplot(1,2,1)
+plt.imshow(img_c)
+plt.title("Original Image")
+plt.axis("off")
+plt.subplot(1,2,2)
+plt.imshow(gray)
+plt.title("Gray Image")
+plt.axis("off")
 plt.show()
 
-## Detect points that form a line using HoughLinesP
-## Developed by : 
-## Reg no :
-lines=cv2.HoughLinesP(edges1,1,np.pi/180, threshold=80, minLineLength=50,maxLineGap=250)
+canny=cv2.Canny(gray,120,150)
+#DISPLAY THE CANNY IMAGE 
+plt.title("Canny Edge Detector")
+plt.axis("off")
+plt.show()
 
-## Draw lines on the image
-## Developed by : 
-## Reg no : 
+lines=cv2.HoughLinesP(canny,1,np.pi/180,threshold=80,minLineLength=50,maxLineGap=250)
+
 for line in lines:
-    x1, y1, x2, y2 = line [0] 
-    cv2.line(edges1,(x1, y1),,3)
+    x1,y1,x2,y2=line[0]
+    cv2.line(img_c,(x1,y1),(x2,y2),(255,0,0),3)
 
-
-
+plt.imshow(img_c)
+plt.title("Result Image")
+plt.axis("off")
+plt.show()
 ## Display the result
 ## Developed by :
 ## Reg no : 
-plt.imshow(edges1)
+
 
